@@ -7,7 +7,7 @@
     "frontendDist": "../dist",
     "devUrl": "http://localhost:3015",
     "beforeDevCommand": "pnpm dev",
-    "beforeBuildCommand": "pnpm build --mode tauri "
+    "beforeBuildCommand": "npm run build -- --mode tauri "
   },
   "app": {
     "windows": [
@@ -29,11 +29,11 @@
       "bin/BiliNoteBackend/BiliNoteBackend"
     ],
     "resources": {
-    "bin/BiliNoteBackend/_internal":"_internal"
+      "bin/BiliNoteBackend/_internal": "_internal"
     },
-    "macOS":{
+    "macOS": {
       "files": {
-               "Frameworks": "bin/BiliNoteBackend/_internal"
+        "Frameworks": "bin/BiliNoteBackend/_internal"
       }
     },
     "active": true,

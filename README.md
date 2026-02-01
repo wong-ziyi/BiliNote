@@ -54,33 +54,75 @@ BiliNote 是一个开源的 AI 视频笔记助手，支持通过哔哩哔哩、Y
 ![screenshot](./doc/image4.png)
 ![screenshot](./doc/image5.png)
 
-## 🚀 快速开始
+## 🚀 运行指南
 
-### 1. 克隆仓库
+### 1. 环境依赖 (Prerequisites)
+
+在开始之前，请确保你的系统已安装以下软件：
+
+- **Node.js** (v18+) & **pnpm**
+- **Python** (3.10+) & **pip**
+- **FFmpeg**: 用于音频处理（必须安装，见下方[依赖说明](#-ffmpeg)）
+- **Docker & Docker Compose** (可选，用于容器化部署)
+
+### 2. 克隆项目与配置环境变量
 
 ```bash
+# 克隆仓库
 git clone https://github.com/JefferyHcool/BiliNote.git
 cd BiliNote
-mv .env.example .env
+
+# 配置文件
+cp .env.example .env
 ```
 
-### 2. 启动后端（FastAPI）
+请根据需要修改 `.env` 文件中的配置，特别是 API 密钥和端口设置。
 
+### 3. 本地开发环境运行
+
+#### A. 启动后端 (FastAPI)
 ```bash
 cd backend
+# 创建并激活虚拟环境 (可选但推荐)
+python -m venv venv
+source venv/bin/activate  # Windows 使用: venv\Scripts\activate
+
+# 安装依赖
 pip install -r requirements.txt
+
+# 启动服务
+source venv/bin/activate
 python main.py
 ```
+后端默认运行在: `http://localhost:8483`
 
-### 3. 启动前端（Vite + React）
-
+#### B. 启动前端 (Vite + React)
 ```bash
+# 回到根目录后进入前端目录
 cd BillNote_frontend
+
+# 安装依赖
 pnpm install
+
+# 启动开发服务器
 pnpm dev
 ```
+访问：`http://localhost:5173` (或 `.env` 中定义的 `FRONTEND_PORT`)
 
-访问：`http://localhost:5173`
+### 4. 使用 Docker 一键部署 (推荐)
+
+项目提供了完整的 Docker 编排配置，可以一键启动全栈服务。
+
+```bash
+# 在项目根目录下运行
+docker-compose up -d
+```
+
+启动后，访问 `http://localhost:3015` (默认为 `APP_PORT` 配置的端口)。
+
+> [!TIP]
+> 如果你有 NVIDIA GPU 并希望启用 CUDA 加速，请使用 `docker-compose.gpu.yml`:
+> `docker-compose -f docker-compose.gpu.yml up -d`
 
 ## ⚙️ 依赖说明
 ### 🎬 FFmpeg
